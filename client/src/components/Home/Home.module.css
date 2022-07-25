@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@font-face {
+    font-family: bunny;
+    src: url('../../fonts/bunny$mambo.ttf');
+}
+
+.nav{
+    background-color: #eaaf0b;
+    width: 100%;
+    height: 7rem;
+    padding: 20px;   
+}
+
+.flex{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+
+.titulo{
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    color: #0375b3;
+    text-shadow: 2px 2px rgb(253, 253, 251);
+}
+
+.filtros{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.container{
+    position: absolute;
+    width: 100%;
+    top: 300px;
+}
+
+/* .svgSup{
+    position: absolute;
+    width: 100%;
+    top: 20px;
+} */
+
+/* .svg{
+    position: sticky;
+    top: 0;
+    
+   
+}
+ */
+
+/* ----------Search------------- */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.search{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.input{
+    font-family: 'Roboto', sans-serif;
+    color:#0375b3;
+    font-size: 18px;
+    padding: 7px;
+    border: 2px solid #0375b3;
+    border-radius: 5px;
+}
+input:focus{
+    outline: none;
+}
+.boton{
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: none;
+    font-size: large;
+    margin-left: 4px;
+    background-color: #0375b3;
+    color: rgb(252, 249, 249);
+    transition: all 400ms ease-in-out;
+}
+
+.boton:hover{
+    background-color:rgb(252, 249, 249);
+    color: #0375b3;
+}

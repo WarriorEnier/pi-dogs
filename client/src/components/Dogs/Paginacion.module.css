@@ -1,0 +1,41 @@
+.flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.input{
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    color: #0375b3;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5px;
+    border: #eaaf0b 2px solid;
+    width: 50px;
+}
+
+.p{
+    color: #0375b3;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+
+}
+.boton{
+    font-size: 26px;
+    padding: 7px;
+    background-color: #0375b3;
+    border-radius: 50%;
+    border: 2px solid #eaaf0b;
+    color: white;
+    cursor: pointer;
+    transition: all 500ms ease-out;
+}
+
+.boton:hover{
+    background-color: #eaaf0b;
+    border: 2px solid #0375b3;
+    color: white;
+}
