@@ -14,13 +14,9 @@ export default function Temperaments(){
 
     function handleFilterTemperaments(e){
         e.preventDefault();
-        dispatch(filterByTemperaments(e))
+        dispatch(filterByTemperaments(e.target.value))
     }
-    function mostrar(){
-        getTemperaments.forEach(element => {
-           console.log(element) 
-        });
-    }
+   
    
     return(
         <>

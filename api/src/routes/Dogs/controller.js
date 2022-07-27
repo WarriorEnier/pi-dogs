@@ -19,6 +19,7 @@ const getDogsApi = async(req, res) =>{
                 ;
         }else if(id){
             //let dogId = dogsAll.findByPk(id, {include:[{model:Temperament}]}) 
+            console.log(id)
             let dogId = dogsAll.filter(el => el.id == id);
             dogId.length
                 ?res.status(200).send(dogId)

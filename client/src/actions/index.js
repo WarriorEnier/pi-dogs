@@ -15,7 +15,7 @@ export const RESET = 'RESETEAR';
 const URL_DOGS = 'http://localhost:3001/dogs';
 const URL_TEMPS = 'http://localhost:3001/temp';
 const URL_NAME = 'http://localhost:3001/dogs?&name=';
-const URL_ID = 'http://localhost:3001/dogs/:id=';
+const URL_ID = 'http://localhost:3001/dogs/';
 
 
 

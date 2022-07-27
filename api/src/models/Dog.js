@@ -14,23 +14,40 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    height:{
+    height_min:{
       type: DataTypes.STRING,
-      allowNull:false
+      allowNull:false,
+      defaultValue:'5'
     },
-    weight:{
+    height_max:{
       type: DataTypes.STRING,
-      allowNull:false
+      allowNull:false,
+      defaultValue:'30'
     },
-    life_span:{
+    weight_min:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      defaultValue:'2'
+    },
+    weight_max:{
+      type: DataTypes.STRING,
+      allowNull:false,
+      defaultValue:'10'
+    },
+    life_span_min:{
       type: DataTypes.STRING,
       allowNull:true,
-      defaultValue: "10 Years"
+      defaultValue: "5"
+    },
+    life_span_max:{
+      type: DataTypes.STRING,
+      allowNull:true,
+      defaultValue: "15"
     }, 
     image: {
       type: DataTypes.STRING,
       allowNull:true,
-      defaultValue:'http://cdn.themill.com/media/00000006102.jpg'
+      defaultValue:'https://i.im.ge/2022/07/25/FIlbgf.jpg'
     },
     createInDb:{
       type: DataTypes.BOOLEAN,

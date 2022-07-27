@@ -1,0 +1,22 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+import { filterByName } from "../../actions";
+import style from './Filtros.module.css';
+
+export default function Name(){
+
+    const dispatch = useDispatch();
+
+    function handleFilterName(e){
+        e.preventDefault();
+        dispatch(filterByName(e.target.value));
+    }
+
+    return(
+        <select className={style.select} onChange={e => handleFilterName(e)}>
+            <option>Alfabéticamente</option>
+            <option value ='A-Z'> A - Z </option>
+            <option value ='Z-A'> Z - A </option>
+        </select>
+    )
+}

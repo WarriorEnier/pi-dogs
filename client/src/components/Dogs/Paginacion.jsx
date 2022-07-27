@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import style from './Paginacion.module.css';
+import page from './Paginacion.module.css';
 
 export default function Paginacion({pag, setPag, maxPag}){
     const [input, setInput] = useState(1)
@@ -35,10 +35,10 @@ export default function Paginacion({pag, setPag, maxPag}){
     };
 
     return (
-            <div className={style.flex}>
+            <div className={page.flex}>
                 <button disabled={pag===1||pag<1} 
                     onClick={previousPage}
-                    className={style.boton}
+                    className={page.boton}
                     >
                 🢀
                 </button>
@@ -48,13 +48,13 @@ export default function Paginacion({pag, setPag, maxPag}){
                     name='page'
                     autoComplete="off"
                     value={input}
-                    className={style.input}
+                    className={page.input}
                 />
-                <p className={style.p}>de {Math.ceil(maxPag)}</p>
+                <p className={page.p}>de {Math.ceil(maxPag)}</p>
                 <button
                     disabled={pag === Math.ceil(maxPag) || pag > Math.ceil(maxPag)}
                     onClick={nextPage}
-                    className={style.boton}
+                    className={page.boton}
                 >
                     🢂
                 </button>

@@ -1,8 +1,9 @@
+
 .container{
     width: 100%;
     max-width: 1200px;
-    height: 430px;
-    top: 10px;
+    position: relative;
+    top: -80px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -19,8 +20,18 @@
     margin: 20px;
     text-align: center;
     transition: all 0.25s;
-    border: #eaaf0b solid 0.5px;
+    border: #eaaf0b solid 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
+}
+
+.card .title{
+    color: #0375b3;
+    font-size: 30px;
+    margin-bottom: 10px;
+    line-height: 25px;
 }
 
 .container .card:hover{
@@ -29,15 +40,47 @@
 }
 
 .container .card img{
-    width: 330px;
+    margin: 7px;
+    width: 310px;
     height: 220px;
+    border-radius: 8px;
 }
 
 
-/* .container .card h4{
+ .container .card h3{
     font-weight: 600;
+    font-size: 15px;
+    margin: 0 10px;
+    color: black;
+    font-size: 15px;
+}
+.container .card .temp{
+    font-size: 20px;
+    margin: 0 5px 0 0;
+    color: #eaaf0b;
+}
+.container .card .peso{
+    font-size: 20px;
+    color: #0375b3;
 }
 
+.container .card a{
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: rgb(224, 222, 222) 1px 0.5px;
+    color: #0375b3;
+    margin-right: -90px;
+    margin-bottom: 10px;
+}
+
+/* .boton{
+    display: inline-block;
+    background-color: red;
+    position: relative;
+    bottom: -2em;
+    
+} */
+/*
 .container .card p{
     padding: 0 1rem;
     font-size: 16px;

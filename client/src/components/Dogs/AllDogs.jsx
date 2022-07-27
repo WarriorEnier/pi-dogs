@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDogs } from "../../actions/index";
+import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import Card from "./Card";
 import Paginacion from "./Paginacion";
@@ -25,21 +26,28 @@ export default function AllDogs({currentDogs}){
     const currentDogs = allDogs.slice(first, end) */
     /* .replace(/,/g,' |') */
     return(
-       
-        <div className={style.container}>         
+       <>
+        <div className={style.container}>
+                    
             {currentDogs.length 
-                ?currentDogs.map(el =>(                                    
+                ?currentDogs.map(el =>( 
+                    
                         <Card 
+                            id={el.id}
                             name={el.name} 
                             image={el.image} 
-                            weight={el.weight} 
-                            temperament={!!el.createInDb?el.temperaments:el.temperament}
+                            weight_min={el.weight_min} 
+                            weight_max={el.weight_max} 
+                            temperaments={!!el.createInDb?el.temperaments:el.temperaments}
                             /* temperament = {el.temperament} */
                             createInDb = {el.createInDb}
                             />                                     
+                                                    
                 ))                      
                 :<Loading/>}
         </div>
+        
+       </>
         
        
     )

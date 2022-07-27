@@ -42,12 +42,36 @@ const getApiDogs = async()=>{
             //temp = el.temperament.replaceAll(',','|')
             return{
                 id:el.id,
+
                 name:el.name,
-                weight:el.weight.metric,
-                height:el.height.metric,
+
+                weight_min:el.weight.metric.split(' - ').length===1
+                                            ? '2'
+                                            :el.weight.metric.split(' - ')[0]!=='NaN'
+                                                ?el.weight.metric.split(' - ')[0]:'2',
+
+                weight_max:el.weight.metric.split(' - ').length===1
+                                            ? el.weight.metric!=='NaN'?el.weight.metric:'10'
+                                            :el.weight.metric.split(' - ')[1],
+
+                height_min:el.height.metric.split(' - ').length===1
+                                            ? '5'
+                                            :el.height.metric.split(' - ')[0],
+
+                height_max:el.height.metric.split(' - ').length===1
+                                            ? el.height.metric
+                                            :el.height.metric.split(' - ')[1],     
+
                 temperaments:[el.temperament].join().split(', '),
+
                 image: el.image.url,
-                life_span: el.life_span
+
+                life_span_min: el.life_span.replace(' years','').split(' - ').length===1
+                                            ? '5'
+                                            :el.life_span.replace(' years','').split(' - ')[0],
+                life_span_max: el.life_span.replace(' years','').split(' - ').length===1
+                                            ? el.life_span.replace(' years','')
+                                            :el.life_span.replace(' years','').split(' - ')[1],                            
             }
         })
         

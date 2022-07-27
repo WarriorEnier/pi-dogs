@@ -19,6 +19,14 @@
     
 }
 
+.titleFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .titulo{
     font-family: 'Pacifico', cursive;
     font-size: 40px;
@@ -36,17 +44,18 @@
     width: 40%;
 }
 
-.container{
-    position: absolute;
-    width: 100%;
-    top: 300px;
+.img{
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    
 }
 
-/* .svgSup{
-    position: absolute;
-    width: 100%;
-    top: 20px;
-} */
+/* .container{
+   width: 100%;
+}
+ */
+
 
 /* .svg{
     position: sticky;
@@ -57,37 +66,3 @@
  */
 
 /* ----------Search------------- */
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-.search{
-    display: flex;
-    flex-direction: row;
-}
-
-
-
-.input{
-    font-family: 'Roboto', sans-serif;
-    color:#0375b3;
-    font-size: 18px;
-    padding: 7px;
-    border: 2px solid #0375b3;
-    border-radius: 5px;
-}
-input:focus{
-    outline: none;
-}
-.boton{
-    padding: 5px 12px;
-    border-radius: 5px;
-    border: none;
-    font-size: large;
-    margin-left: 4px;
-    background-color: #0375b3;
-    color: rgb(252, 249, 249);
-    transition: all 400ms ease-in-out;
-}
-
-.boton:hover{
-    background-color:rgb(252, 249, 249);
-    color: #0375b3;
-}
