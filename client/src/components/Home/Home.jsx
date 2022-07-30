@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import { Link } from "react-router-dom";
-import { getDogs } from "../../actions/index"
+import { Link} from "react-router-dom";
+import { getDogs,reset} from "../../actions/index"
 import AllDogs from "../Dogs/AllDogs";
 import Paginacion from "../Dogs/Paginacion";
 
@@ -16,16 +16,19 @@ import MaxMin from "../Filtros/MaxMin";
 import Name from "../Filtros/Name";
 import SearchBar from "../SearchBar/SearchBar";
 import logo from "../../img/dog2.png"
+import Error from "../Error/Error";
 
 
 
 export default function Home(){
     const dispatch = useDispatch();
-
+    const [isTrue, setIsTrue] = useState(false)
     const allDogs = useSelector((state) =>state.dogs);
 
     const [pag, setPag] = useState(1);
     const [porPag, setPorPag] = useState(8);
+    const [orden, setOrden] = useState('')
+    
 
     const paginado = (pagNum)=>{
         setPag(pagNum)
@@ -33,28 +36,30 @@ export default function Home(){
 
     useEffect(()=>{
         dispatch(getDogs())
+        setPag(1)
+        reset()
     },[dispatch]);
     
 
-    const [orden, setOrden] = useState('')
 
     function handleFilterOrder(e){ 
         e.preventDefault();
         dispatch(filterByOrdenamiento(e.target.value))
-        setPag(1);
-        
         setOrden(`Ordenado ${e.target.value}`)
+        setPag(1)
     }
 
     function handleFilterWeight(e){
         e.preventDefault();
         dispatch(filterByWeight(e.target.value));
+        setPag(1)
     }
+  
     const maxPag = allDogs.length/porPag;
     const first = (pag-1)*porPag;
     const end = (pag-1)*porPag+porPag;
     const currentDogs = allDogs.slice(first, end)
-
+    
     return(
         <>  
         <div className={style.container}>
@@ -64,7 +69,8 @@ export default function Home(){
 
                     <div className={style.titleFlex}>
                         {/* <i class="fa-solid fa-dog"></i> */}
-                        <img className={style.img}  src={logo} alt="" />
+                        {/* <img className={style.img}  src={logo} alt="" /> */}
+                        <span className={style.img}>🐩</span>
                         <h1 className={style.titulo}>DOGS</h1>
                     </div>
 
@@ -75,14 +81,17 @@ export default function Home(){
                                 <option value="desc">DESC</option>
                         </select>
                         <Creado/>
-                        <Temperaments/>
-                        {/* <MaxMin/> */}
+                        <Temperaments setPag={setPag}/>
+                        {/* <MaxMin  setPag={setPag}/> */}
                         <select  className={s.select} onChange={e=>handleFilterWeight(e)}>
                             <option>Peso</option>
                             <option value="max">Max</option>
                             <option value="min">Min</option>
                         </select>
-                        <Name/>
+                        <Name setPag={setPag}/>
+                    </div>
+                    <div>
+                        <Link to ='/home/dog/form'><span className={style.form}>Crear🐶</span></Link>
                     </div>
                     <div>
                         <SearchBar/>
@@ -96,12 +105,16 @@ export default function Home(){
 
             {/* <Order setPag={setPag}/> */}
             <div /* className={style.container} */>
-
-                <AllDogs currentDogs={currentDogs}/>
+                {allDogs === 'Error'
+                ?<Error/>         
+                :<AllDogs currentDogs={currentDogs} />
+                }
+                
+                
             </div>
         </div>
 
-                <Paginacion pag={pag} setPag={setPag} maxPag={maxPag}/>
+                <Paginacion pag={pag} setPag={paginado} maxPag={maxPag} isTrue={isTrue} setIsTrue={setIsTrue} />
                 <div className={style.svg}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#eaaf0b" fill-opacity="1" d="M0,256L40,240C80,224,160,192,240,186.7C320,181,400,203,480,218.7C560,235,640,245,720,234.7C800,224,880,192,960,197.3C1040,203,1120,245,1200,245.3C1280,245,1360,203,1400,181.3L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
                 </div> 

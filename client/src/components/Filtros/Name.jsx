@@ -3,13 +3,14 @@ import { useDispatch } from "react-redux";
 import { filterByName } from "../../actions";
 import style from './Filtros.module.css';
 
-export default function Name(){
+export default function Name({setPag}){
 
     const dispatch = useDispatch();
 
     function handleFilterName(e){
         e.preventDefault();
         dispatch(filterByName(e.target.value));
+        setPag(1)
     }
 
     return(

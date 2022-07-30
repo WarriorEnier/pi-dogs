@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+.contenedor{
+    display: flex;
+    width: 100%;
+    height: 110vh;
+    border-radius: 10px;
+    z-index: 100;
+    
+}
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+.contentForm{
+    display: flex;
+    margin: 10px 0 0 10px;
+    
+    width: 75%;
+    height: 600px;
+    
+}
+
+.contentImg{
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #eaaf0b;
+    justify-content: space-between;
+    width: 40%;
+    
+}
+
+.flexBoton{
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentImg img{
+    width: 90%;
+    
+}
+
+.contentInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    border-radius: 0 10px 10px 0;
+    background-color: #0375b3;;
+}
+.contentInput .input{
+    width: 90%;
+    height: 20px;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #0375b3;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: none;
+
+
+}
+.contentInput .inputIni{
+    margin-left: 20px;
+    border-radius: 15px 0 0 15px;
+    border: none;
+    height: 20px;
+    border-right: 2px solid #eaaf0b;
+    padding-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #0375b3;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 45%;
+}
+.contentInput .inputFin{
+    margin-right: 20px;
+    border-radius: 0px 15px 15px 0px;
+    border: none;
+    height: 20px;
+    border-left: 2px solid #eaaf0b;
+    padding-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #0375b3;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 45%;
+}
+.contentInput h2{
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    font-weight: 700;
+}
+.contentInput p{
+    color: white;
+    text-align: start;
+    margin: 0 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.contentInput span{
+    color: #eaaf0b;
+    position: relative;
+    top: 5px;
+}
+.contentInput h3{
+    font-size: 15px;
+    text-align: start;
+    margin-left: 30px;
+}
+.contentSel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    
+}
+.contentSel select:first-child{
+    margin: 10px 0 10px 20px ;
+}
+.contentSel select{
+    height: 40px;
+    color:#0375b3;
+    font-size: 16px;
+    padding: 7px 15px;
+    background-color: rgb(250, 253, 251);;
+    border: 2px solid #0375b3;
+    border-radius: 5px;
+    margin: 0px 2px;
+}
+
+.contentInput .temp{
+    color: #0375b3;
+}
+.contentInput .boton{
+    background-color: #eaaf0b;
+    color: white;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+    margin: 0px 10px;
+}
+.contentInput .boton:nth-child(2){
+    background-color: #f6f9fa;
+    color: #0375b3;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #fafaf8;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+}
+.contentInput .boton:hover:nth-child(2){
+    background-color: #0375b3;
+    color: white;
+    border: 1px solid #eaaf0b;
+}
+
+.contentInput .boton:hover{
+    background-color: white;
+    color: #0375b3;
+    border: 1px solid #eaaf0b;
+}
+ul {
+   display: flex;
+
+}
+ul li .span{
+    background-color: #eaaf0b;
+    color: white;
+    border-radius: 5px;
+    padding:1px 5px;
+    font-weight: 600;
+    margin: 5px;
+
+}
+ul li .button{
+    color: white;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: all 500ms ease-in-out;
+}
+ul li .button:hover{
+    color: #0375b3;
+}
+
+
+.content .res{
+    position: relative;
+    width: 40%;
+}
+/* Asta acá */
+/* .containerMain{
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+
+}
+
+.containerMain .container h1{
+    color: white;
+}
+
+.containerMain .container input{
+    background-color: #eaaf0b;
+    border: none;
+    color: #0375b3;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+    margin: 0 5px;
+}
+.containerMain .container label{
+    color: white;
+    font-size: 20px;
+    margin-right: 5px;
+}
+.containerMain .container span{
+    color: white;
+    font-size: 20px;
+    margin-right: 5px;
+}
+.containerMain .container select{
+    background-color: #eaaf0b;
+    border: none;
+    color: #0375b3;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+    margin: 0 5px;
+}
+.containerMain .container .name{
+    width: 400px;
+}
+
+.containerMain .container .pe{
+    width: 100px;
+}
+.containerMain button{
+    margin-left: 20px;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    border: 2px #e5ecf0 solid;
+    background-color: #0375b3;
+    color: #e5ecf0;
+    transition: all 500ms ease-in-out;
+    font-size: 15px;
+
+}
+
+.containerMain button:hover{
+    color: #eaaf0b;
+}
+.containerMain button span{
+    color: #e5ecf0;
+    font-size: 15px;
+    font-weight: bold;
+        
+}
+.container{
+    display: flex;  
+    justify-content: space-around;
+    border: white 2px solid;
+    box-shadow: rgba(0, 0, 0, 0.247) 4px 4px;
+    background-color: #0375b3;
+    border-radius: 10px;
+    width: 900px;
+    height: 500px;
+
+}
+.container .col1{
+    display: flex;
+    flex-direction: column;
+}
+.containerMain .col{
+    display: flex;
+}
+.container .conteImg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+}
+.container .conteImg img{
+    align-items: center;
+    width: 400px;
+    
+    border-radius: 10px;
+    border: #eaaf0b 3px solid;
+}
+
+.container img{
+    width: 50%;
+}
+
+.container .body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 10px;
+}
+
+.container .body h2,h3{
+    color: #e5ecf0;
+}
+
+
+
+ */

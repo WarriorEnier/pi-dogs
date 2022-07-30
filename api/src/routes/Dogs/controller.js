@@ -15,7 +15,7 @@ const getDogsApi = async(req, res) =>{
             let dogName = dogsAll.filter(el=>el.name.toLowerCase().includes(name.toString().toLowerCase()));
             dogName.length
                 ?res.status(200).send(dogName)
-                :res.status(404).send('No se encontro un Dog con ese nombre')
+                :res.status(404).send({msg:'No se encontro un Dog con ese nombre'})
                 ;
         }else if(id){
             //let dogId = dogsAll.findByPk(id, {include:[{model:Temperament}]}) 
@@ -23,7 +23,7 @@ const getDogsApi = async(req, res) =>{
             let dogId = dogsAll.filter(el => el.id == id);
             dogId.length
                 ?res.status(200).send(dogId)
-                :res.status(400).send('No se encontro un video juego con el ID = '+ id);
+                :res.status(400).send({msg:'No se encontro un video juego con el ID = '+ id});
         }else{
             
             return res.status(200).send(dogsAll);
@@ -38,12 +38,14 @@ const postDogs = async(req, res) =>{
     try{
         let {
             name,
-            height,
-            weight,
-            life_span,
+            height_min,
+            height_max,
+            weight_min,
+            weight_max,
+            life_span_min,
+            life_span_max,
             image,
-            temperament,
-            createInDb
+            temperaments,
         } = req.body;
 
         const dogsAll = await getAllDogs();
@@ -51,14 +53,17 @@ const postDogs = async(req, res) =>{
         if(!result.length){
             const dogCreate = await Dog.create({
                 name,
-                height,
-                weight,
-                life_span,
+                height_min,
+                height_max,
+                weight_min,
+                weight_max,
+                life_span_min,
+                life_span_max,
                 image,
-                createInDb
+                
             })
 
-            let tempDb = await Temperament.findAll({where:{name:temperament}});
+            let tempDb = await Temperament.findAll({where:{name:temperaments}});
             dogCreate.addTemperament(tempDb);
             return res.send('Dog creado con exito')
         }

@@ -17,8 +17,8 @@
 input:focus{
     outline: none;
 }
-.boton{
-    padding: 5px 12px;
+form .boton{
+    padding: 8px 12px;
     border-radius: 5px;
     border: none;
     font-size: large;
@@ -28,7 +28,7 @@ input:focus{
     transition: all 400ms ease-in-out;
 }
 
-.boton:hover{
+form .boton:hover{
     background-color:rgb(252, 249, 249);
     color: #0375b3;
 }

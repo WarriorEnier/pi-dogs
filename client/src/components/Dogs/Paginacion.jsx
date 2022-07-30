@@ -1,8 +1,19 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
+import { getDogs } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
 import page from './Paginacion.module.css';
 
-export default function Paginacion({pag, setPag, maxPag}){
-    const [input, setInput] = useState(1)
+export default function Paginacion({pag, setPag, maxPag, isTrue, setIsTrue}){
+    const dispatch = useDispatch();
+    const dogs = useSelector(state => state.allDogs);
+    const [input, setInput] = useState(pag)
+
+    /* useEffect(()=>{
+      dispatch(getDogs())
+      
+        
+      
+    },[]) */
     
     const nextPage = () =>{
         setInput(parseInt(input)+1);
@@ -29,11 +40,14 @@ export default function Paginacion({pag, setPag, maxPag}){
             setPag (parseInt (e.target.value));
           }
         }
+        
       };
     const onChange = (e) =>{
         setInput(e.target.value);
-    };
+        setInput(pag)    
+    
 
+    };
     return (
             <div className={page.flex}>
                 <button disabled={pag===1||pag<1} 
@@ -46,8 +60,9 @@ export default function Paginacion({pag, setPag, maxPag}){
                     onChange={e=>onChange(e)}
                     onKeyDown={e=>onKeyDown(e)}
                     name='page'
-                    autoComplete="off"
-                    value={input}
+                    autoComplete="off"  
+                    /* disabled  */                 
+                    value={pag}
                     className={page.input}
                 />
                 <p className={page.p}>de {Math.ceil(maxPag)}</p>

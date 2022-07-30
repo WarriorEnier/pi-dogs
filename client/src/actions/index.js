@@ -3,6 +3,7 @@ export const GET_DOGS = 'MOSTRAR TODOS LOS PERROS';
 export const GET_DOGS_TEMPERAMENTS = 'MOSTRAR TODOS LOS TEMPERAMENTOS';
 export const GET_NAME_DOGS = 'MOSTRAR DOGS X NAME';
 export const GET_ID_DOG = 'MOSTRAR DOG X ID'
+export const POST_DOG = 'GUARDAR PERRO';
 export const ORDENAMIENTO = 'ORDENAMIENTO ASC DES';
 export const FILTER_BY_WEIGHT = 'ORDENAMIENTO POR PESO';
 export const FILTER_BY_NAME = 'ORDENAMIENRO POR NOMBRE';
@@ -58,7 +59,8 @@ export const getNameDogs = (name)=>{
                 payload: nameJson.data
             });
         } catch (error) {
-            throw new Error(error+ 'Error al mostrar Dog x name')
+            console.log(error);
+			return dispatch({ type: GET_NAME_DOGS, payload:'Error'});
         }
     }
 }
@@ -73,7 +75,7 @@ export const getDogById = (id) =>{
                 payload:idJson.data
             })
         } catch (error) {
-            throw new Error(error+' Error al mostrar x ID')
+            return dispatch({ type: GET_ID_DOG, payload:'Error'});
         }
     }
 }

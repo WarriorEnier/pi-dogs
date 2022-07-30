@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom';
 import Loading from "../Loading/Loading";
 import style from './Detail.module.css';
 
+import ErrorId from "../Error/ErrorId";
+
 
 
 export default function Detail(props){
@@ -22,7 +24,7 @@ export default function Detail(props){
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#eaaf0b" fill-opacity="1" d="M0,320L34.3,282.7C68.6,245,137,171,206,122.7C274.3,75,343,53,411,74.7C480,96,549,160,617,160C685.7,160,754,96,823,80C891.4,64,960,96,1029,90.7C1097.1,85,1166,43,1234,37.3C1302.9,32,1371,64,1406,80L1440,96L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg>
             <div className={style.containerMain}>
 
-                {
+                {myDog!=='Error'?
                     myDog.length>0
                     ?<div className={style.container}>
                         <div className={style.conteImg} >
@@ -46,6 +48,7 @@ export default function Detail(props){
                         </div>
                     </div>
                     :<Loading/>
+                    :<ErrorId/>
                 }
                 <button>
 

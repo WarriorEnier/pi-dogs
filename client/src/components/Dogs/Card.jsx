@@ -19,7 +19,8 @@ export default function Card({id,name, image, weight_min, weight_max, temperamen
                     <h2 className={style.title}>{name}</h2>
                 
                     <h3><span className={style.temp}>😊😡:</span> {
-                        !!createInDb?temperaments.map((el, i)=>{
+                        !!createInDb
+                        ?temperaments.map((el, i)=>{
                         return i === temperaments.length-1?el.name:el.name+ ' | '})
                         :temperaments.map((el, i) => {return i === temperaments.length-1?el:el+' | '})
                         }
@@ -27,10 +28,8 @@ export default function Card({id,name, image, weight_min, weight_max, temperamen
                     <h3><span className={style.peso}>Peso:</span> {weight_min}<span> to </span>{weight_max}</h3>
                 </div>
                 <div className={style.boton}></div>
-                <Link to={'/home/dog/'+id}>
-                    
-                        <a>{`ver mas >`}</a>
-                    
+                <Link to={'/home/dog/'+id}>                 
+                        <a>{`ver mas >`}</a>                
                 </Link>
 
             </div>

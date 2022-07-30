@@ -2,12 +2,16 @@
 .select{
     font-family: 'Roboto', sans-serif;
     color:#0375b3;
-    font-size: 18px;
+    font-size: 16px;
     padding: 5px;
     background-color: rgb(250, 253, 251);;
     border: 2px solid #0375b3;
     border-radius: 5px;
     margin: 0px 2px;
+}
+
+.select option{
+    color:#0375b3;
 }
 
 select:focus{

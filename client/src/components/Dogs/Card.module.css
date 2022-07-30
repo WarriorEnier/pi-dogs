@@ -11,13 +11,13 @@
 }
 
 .container .card{
-    width: 330px;
-    height: 430px;
+    width: 280px;
+    height: 480px;
     background-color:#e5eaeb;
     border-radius: 8px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    margin: 20px;
+    margin: 10px;
     text-align: center;
     transition: all 0.25s;
     border: #eaaf0b solid 2px;
@@ -41,7 +41,7 @@
 
 .container .card img{
     margin: 7px;
-    width: 310px;
+    width: 260px;
     height: 220px;
     border-radius: 8px;
 }
@@ -69,7 +69,7 @@
     font-weight: bold;
     text-shadow: rgb(224, 222, 222) 1px 0.5px;
     color: #0375b3;
-    margin-right: -90px;
+    margin-right: -70px;
     margin-bottom: 10px;
 }
 

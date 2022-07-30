@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @font-face {
     font-family: bunny;
     src: url('../../fonts/bunny$mambo.ttf');
@@ -45,11 +46,28 @@
 }
 
 .img{
-    width: 40px;
+    /* width: 40px;
     height: 40px;
-    margin-left: -20px;
+    margin-left: -20px; */
+    font-size: 40px;
     
 }
+
+.form{
+    background-color: #0375b3;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: all 500ms ease-in-out;
+}
+.form:hover{
+    background-color: white;
+    color: #0375b3;
+}
+
 
 /* .container{
    width: 100%;

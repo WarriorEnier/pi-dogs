@@ -62,7 +62,7 @@ const getApiDogs = async()=>{
                                             ? el.height.metric
                                             :el.height.metric.split(' - ')[1],     
 
-                temperaments:[el.temperament].join().split(', '),
+                temperaments:!!el.temperament?[el.temperament].join().split(', '):['Temperament not found'],
 
                 image: el.image.url,
 

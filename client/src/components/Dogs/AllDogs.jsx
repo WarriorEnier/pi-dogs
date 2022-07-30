@@ -10,6 +10,7 @@ import style from './Card.module.css'
 
 
 export default function AllDogs({currentDogs}){
+    const [error, setError] = useState(false)
   /*   const allDogs = useSelector((state) =>state.dogs);
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -25,10 +26,12 @@ export default function AllDogs({currentDogs}){
     const end = (pag-1)*porPag+porPag;
     const currentDogs = allDogs.slice(first, end) */
     /* .replace(/,/g,' |') */
+  
     return(
        <>
+       
         <div className={style.container}>
-                    
+               
             {currentDogs.length 
                 ?currentDogs.map(el =>( 
                     

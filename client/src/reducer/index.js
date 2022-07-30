@@ -4,6 +4,7 @@ import {
     GET_NAME_DOGS,
     GET_ID_DOG,
     ORDENAMIENTO,
+    POST_DOG,
     FILTER_BY_CREATED,
     FILTER_BY_NAME,
     FILTER_BY_TEMP,
@@ -29,9 +30,11 @@ function rootReducer(state = initialState, action){
                 allDogs: action.payload
             }
         case GET_DOGS_TEMPERAMENTS:
+            const ordenTemp = action.payload.sort((a,b)=> a.name>b.name?1:-1)
+            console.log(ordenTemp);
             return{
                 ...state,
-                temps:action.payload
+                temps:ordenTemp
             }
         case GET_NAME_DOGS:
             return{
@@ -108,16 +111,16 @@ function rootReducer(state = initialState, action){
             let allDogs5 = [...state.allDogs];
             let ordenarAlfa = action.payload === 'Z-A'
             ?allDogs5.sort((a,b)=>{
-                if(a.name > b.name){
+                if(a.name.toLowerCase() > b.name.toLowerCase()){
                     return -1   
-                }else if(a.name < b.name){
+                }else if(a.name.toLowerCase() < b.name.toLowerCase()){
                     return 1
                 }else{
                     return 0
                 }
             })
             :allDogs5.sort((a,b)=>{
-                if(a.name < b.name){
+                if(a.name.toLowerCase() < b.name.toLowerCase()){
                     return -1   
                 }else if(a.name > b.name){
                     return 1
@@ -142,12 +145,13 @@ function rootReducer(state = initialState, action){
                 ...state,
                 dogs:statusTemp
             }
-        //case POST_VIDEOGAME:
-        //    return {...state}
+        case POST_DOG:
+            return {...state}
         case RESET:
             return{
                 ...state,
-                detail:{}
+                detail:{},
+                
             }
         default:
             return {...state}
