@@ -37,7 +37,7 @@ export default function Home(){
     useEffect(()=>{
         dispatch(getDogs())
         setPag(1)
-        reset()
+        dispatch(reset());
     },[dispatch]);
     
 

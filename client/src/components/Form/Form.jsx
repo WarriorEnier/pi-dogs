@@ -9,6 +9,7 @@ export default function Form(){
     
     const [boton, setBoton] = useState(true)
     const [errors, setErrors] = useState(false);
+    const [tempSel, setTemp] = useState([])
     const [input, setInput] = useState({
         name:"",
         weight_min:"",
@@ -47,15 +48,16 @@ export default function Form(){
     }
 
     function validarWeightMin(input,max){
-        if(input.match((/[\[\\\^\$\.\|\?\*\+\-\/\)\{\}]/g)))return'only number';
-        if(!input.match((/^\d+$/)))return'only number';
-        if(input<0)return 'only number of positives';
+        //if(input.match((/[\[\\\^\$\.\|\?\*\+\/\)\{\}]/g)))return'only number';
+        if(!input.match((/^\d+$/)))return 'only number';
         if(input > 99)return'min out of range';
-        if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
+        //if(!input.match((/^[0-9]*$/)))return'only number';
+        //if(input<0)return 'only number of positives';
+        //if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
     }
 
     function validarWeightMax(input,min){
-        if(input<0)return 'only number of positives';
+        //if(input<0)return 'only number of positives';
         if(!input.match((/^\d+$/)))return 'only number';
         if(input > 120)return 'max out of range';
         if(parseInt(input)<=parseInt(min))return 'max cannot be less than or equal to min';
@@ -89,7 +91,7 @@ export default function Form(){
     }
 
     function validarTemperament(input){
-        if(input.length < 1)return 'min 1 temperaments per breed';
+        if(input.length===0)return 'min 1 temperaments per breed';
     }
 
     function validarImage(input){
@@ -204,15 +206,20 @@ export default function Form(){
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        const nameRep = allDogs.filter(dog => dog.name.toLowerCase()===input.name.toLowerCase())
+        
         if(name.trim()===''
             ||weight_min.trim()===''
             ||weight_max.trim()===''
             ||height_min.trim()===''
-            ||height_max.trim()===''){
+            ||height_max.trim()===''
+            ||temperaments.length===0){
                 setErrors(true)
-                return alert('Faltan campos por completar')
-        }else{
-
+                //return alert('Faltan campos por completar')
+        }else if(nameRep.length!==0){
+                setErrors(true)
+                return alert('Ya esta el perro')
+        }else{           
             dispatch(postDogs(input))
             setInput({
                 name:"",
@@ -244,6 +251,9 @@ export default function Form(){
             ...input,
             temperaments: temperaments.filter(t => t !== e)
         })
+        if(temperaments.length<7){
+            setBoton(true)
+        }
     }
     const handleReset = (e) =>{
         e.preventDefault();
@@ -280,6 +290,7 @@ export default function Form(){
                         <div className={style.contentInput}>                            
                             <div>                        
                                 <h2>Create DOG</h2>
+                                {/* {errors?(<p className={style.pError}>Este perro ya se encuentra</p>):null} */}
                             </div>
                             {/* Contenedor del name */}
                             <form action="" onSubmit={(e)=>handleSubmit(e)}>
@@ -288,6 +299,7 @@ export default function Form(){
                                     <div className={style.flexErrors}>
                                         <p>Name<span> *</span></p>
                                         {input.name&&(<p className={style.pError}>{errorName}</p>)}
+                                        
                                     </div>
                                     
                                     <input 
@@ -309,7 +321,7 @@ export default function Form(){
                                         {input.weight_max && (<p className={style.pError}>{errorWeightMax}</p>)}
                                     </div>
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         value={weight_min}
                                         name="weight_min"
                                         onChange={handleChange}
@@ -403,7 +415,7 @@ export default function Form(){
                                 <div className={style.contentSel}>
                                     
                                     <select onChange={e => handleSelectTemp(e)} disabled={!boton}>
-                                    {input.temperaments&&(<p className={style.pError}>{errorTemperament}123</p>)}
+                                    
                                         <option className={style.temp} disabled selected>Temperaments</option>
                                         
                                         {temp.map((el, i) =>{
@@ -418,7 +430,10 @@ export default function Form(){
                                             )
                                         })}
                                     </select>
-                                    
+                                    <div className={style.flexErrors}>
+
+                                        {temperaments&&(<p className={style.pError}>{errorTemperament}</p>)}
+                                    </div>
                                 </div>
                                 <h3><span>* </span>these values are required</h3>
                              <div className={style.flexBoton}>

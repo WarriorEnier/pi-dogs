@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { filterCreated } from "../../actions";
+import { filterCreated, reset } from "../../actions";
 import style from './Filtros.module.css';
 
 
@@ -11,6 +11,7 @@ export default function Creado(){
     function handleFilterCreated(e){
         e.preventDefault();
         dispatch(filterCreated(e.target.value));
+        dispatch(reset())
     }
 
     return(

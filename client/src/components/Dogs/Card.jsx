@@ -21,7 +21,7 @@ export default function Card({id,name, image, weight_min, weight_max, temperamen
                     <h3><span className={style.temp}>😊😡:</span> {
                         !!createInDb
                         ?temperaments.map((el, i)=>{
-                        return i === temperaments.length-1?el.name:el.name+ ' | '})
+                        return i === temperaments.length-1?el:el+ ' | '})
                         :temperaments.map((el, i) => {return i === temperaments.length-1?el:el+' | '})
                         }
                     </h3>

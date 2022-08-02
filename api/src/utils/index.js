@@ -95,7 +95,23 @@ const getMyDb = async() =>{
                 }
             }
         })
-        return db
+        //ojo acá
+        const dbNew = db.map(e =>{
+            return {
+                id: e.id,
+                name: e.name,
+                image: e.image || 'https://i.im.ge/2022/07/25/FIlbgf.jpg',
+                height_min: e.height_min,
+                height_max: e.height_max,
+                weight_min: e.weight_min,
+                weight_max: e.weight_max,
+                life_span_min: e.life_span_min,
+                life_span_max:e.life_span_max,
+                createInDb: e.createInDb,
+                temperaments: e.temperaments.map(e => e.name)
+            }
+        })
+        return dbNew
     } catch (error) {
         throw new Error(error +' Error en la captura de datos en BD')
     }
@@ -107,7 +123,6 @@ const getAllDogs = async(req, res)=>{
     try {
         const dogApi = await getApiDogs();
         const dogDb = await getMyDb();
-    
         const allDogs = dogApi.concat(dogDb);
         return allDogs;
     } catch (error) {
