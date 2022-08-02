@@ -69,8 +69,8 @@ export default function Home(){
 
                     <div className={style.titleFlex}>
                         {/* <i class="fa-solid fa-dog"></i> */}
-                        {/* <img className={style.img}  src={logo} alt="" /> */}
-                        <span className={style.img}>🐩</span>
+                        <img className={style.img}  src={logo} alt="" />
+                        {/* <span className={style.img}>🐩</span> */}
                         <h1 className={style.titulo}>DOGS</h1>
                     </div>
 

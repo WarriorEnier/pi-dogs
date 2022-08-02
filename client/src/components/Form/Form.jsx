@@ -7,7 +7,8 @@ import style from './Form.module.css';
 
 export default function Form(){
     
-    const [errors, setErrors] = useState({});
+    const [boton, setBoton] = useState(true)
+    const [errors, setErrors] = useState(false);
     const [input, setInput] = useState({
         name:"",
         weight_min:"",
@@ -33,26 +34,219 @@ export default function Form(){
 
     const dispatch = useDispatch();
     const temp = useSelector(state => state.temps);
+    const allDogs = useSelector(state => state.dogs);
 
     useEffect(()=>{
         dispatch(getTemperaments())
     },[]);
 
-
-    function validar(input){
-        let errors={};
+    function validarName(input){
+        if(!input.match(/^\S/)){return 'only text'}      
+        if(!input.match((/^[a-zA-Z ]+$/))) {return 'only text '}  
+        if(input.length < 4){return 'very short name';}
     }
+
+    function validarWeightMin(input,max){
+        if(input.match((/[\[\\\^\$\.\|\?\*\+\-\/\)\{\}]/g)))return'only number';
+        if(!input.match((/^\d+$/)))return'only number';
+        if(input<0)return 'only number of positives';
+        if(input > 99)return'min out of range';
+        if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
+    }
+
+    function validarWeightMax(input,min){
+        if(input<0)return 'only number of positives';
+        if(!input.match((/^\d+$/)))return 'only number';
+        if(input > 120)return 'max out of range';
+        if(parseInt(input)<=parseInt(min))return 'max cannot be less than or equal to min';
+    }
+
+    function validarHeightMin(input, max){
+        if(input<0)return 'only number of positives';
+        if(!input.match((/^\d+$/)))return 'only number';
+        if(input > 99)return 'min out of range';
+        if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
+    }
+    function validarHeightMax(input, min){
+        if(input<0)return 'only number of positives';
+        if(!input.match((/^\d+$/)))return 'only number';
+        if(input > 120)return 'max out of range';
+        if(parseInt(input)<=parseInt(min))return 'max cannot be less than or equal to min';
+    }
+
+    function validarLifeSpanMin(input, max){
+        if(input<0)return 'only number of positives';
+        if(!input.match((/^\d+$/)))return 'only number';
+        if(input > 99)return 'min out of range';
+        if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
+    }
+
+    function validarLifeSpanMax(input, min){
+        if(input<0)return 'only number of positives';
+        if(!input.match((/^\d+$/)))return  'only number';
+        if(input > 120)return 'max out of range';
+        if(parseInt(input)<=parseInt(min))return 'max cannot be less than or equal to min';
+    }
+
+    function validarTemperament(input){
+        if(input.length < 1)return 'min 1 temperaments per breed';
+    }
+
+    function validarImage(input){
+        if(!input.match(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/))return 'invalid URL'
+    }
+
+    const errorName = validarName(input.name);
+    const errorWeightMin = validarWeightMin(input.weight_min, input.weight_max);
+    const errorWeightMax = validarWeightMax(input.weight_max, input.weight_min);
+    const errorHeightMin = validarHeightMin(input.height_min, input.height_max);
+    const errorHeightMax = validarHeightMax(input.height_max, input.height_min);
+    const errorLifeSpanMin = validarLifeSpanMin(input.life_span_min, input.life_span_max);
+    const errorLifeSpanMax = validarLifeSpanMax(input.life_span_max, input.life_span_min);
+    const errorTemperament = validarTemperament(input.temperaments);
+    const errorImage = validarImage(input.image);
+
+    function validarErrores(name, weight_min, weight_max, height_min, height_max, life_min, life_max, temperaments ){  
+        if(name!==undefined
+            && weight_min!==undefined
+            && weight_max!==undefined
+            && height_min!==undefined
+            && height_max!==undefined
+            && life_min!==undefined
+            && temperaments!==undefined
+            && life_max!==undefined)return true;                    
+    }
+    const resValidar = validarErrores(
+        errorName,
+        errorWeightMin,
+        errorWeightMax,
+        errorHeightMin,
+        errorHeightMax,
+        errorLifeSpanMin,
+        errorLifeSpanMax,
+        errorTemperament,
+        );
+    
+    /* function validar(input){
+        let errors={};
+        const nameRep = allDogs.filter(dog => dog.name.toLowerCase()===input.name.toLowerCase())
+        console.log(nameRep)
+        
+        if(!input.name){errors.name = 'name field is required';}
+        else if(!input.name.match((/^[a-zA-Z ]+$/))) {errors.name ='only text '}
+
+        
+        if(!input.weight_min){errors.weight_min = 'min field is required';}
+        else if(!input.weight_min.match((/^\d+$/))){errors.weight_min = 'only number';}
+        else if(input.weight_min > 100){errors.weight_min = 'min out of range';}
+        else if(parseInt(input.weight_min)>=parseInt(input.weight_max))errors.weight_min = 'min cannot be greater than or equal to max';
+        
+        if(!input.weight_max){errors.weight_max = 'max field is required';}
+        else if(!input.weight_max.match((/^\d+$/))){errors.weight_max = 'only number';}
+        else if(input.weight_max > 150){errors.weight_max = 'max out of range';}
+        else if(parseInt(input.weight_max)<=parseInt(input.weight_min))errors.weight_min = 'max cannot be less than or equal to min';
+
+
+        if(!input.height_min){errors.height_min = 'min field is required';}
+        else if(!input.height_min.match((/^\d+$/))){errors.height_min = 'only number';}
+        else if(input.height_min > 100){errors.height_min = 'min out of range';}
+        else if(parseInt(input.height_min)>=parseInt(input.height_max))errors.height_min = 'min cannot be greater than or equal to max';
+        
+        if(!input.height_max){errors.height_max = 'max field is required';}
+        else if(!input.height_max.match((/^\d+$/))){errors.height_max = 'only number';}
+        else if(input.height_max > 150){errors.height_max = 'max out of range';}
+        else if(parseInt(input.height_max)<=parseInt(input.height_min))errors.height_min = 'max cannot be less than or equal to min';
+
+        
+        if(!input.life_span_min.match((/^\d+$/))){errors.life_span_min = 'only number';}
+        else if(input.life_span_min > 100){errors.life_span_min = 'min out of range';}
+        else if(parseInt(input.life_span_min)>=parseInt(input.life_span_max))errors.height_min = 'min cannot be greater than or equal to max';
+        
+        
+        if(!input.life_span_max.match((/^\d+$/))){errors.life_span_max = 'only number';}
+        else if(input.life_span_max > 150){errors.life_span_max = 'max out of range';}
+        else if(parseInt(input.life_span_max)<=parseInt(input.life_span_min))errors.height_min = 'max cannot be less than or equal to min';
+
+        if(temperaments.length > 6)errors.temperaments = 'maximum 6 temperaments per breed';
+
+        if(!input.image.match(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/))errors.image = 'URL invalida'
+        //else if(nameRep.length>0){errors.name = 'this name is already in the DB'}
+        /* 
+        
+        if(height_min.trim()==='')errors.height_min = 'height min field is required';
+        if(life_span_max.trim()==='')errors.height_max = 'height min field is required';
+        
+        
+        
+        if(!height_min.match(/^\d+$/))errors.height_min = 'only number';
+        if(!height_max.match(/^\d+$/))errors.height_max = 'only number';
+        if(!life_span_min.match(/^\d+$/))errors.life_span_min = 'only number';
+        if(!life_span_max.match(/^\d+$/))errors.life_span_max = 'only number';
+        
+        
+        if(parseInt(height_min)>=parseInt(height_max))errors.height_min = 'min cannot be greater than or equal to max';
+        if(parseInt(height_max)<=parseInt(height_min))errors.height_min = 'max cannot be less than or equal to min';
+        if(parseInt(life_span_min)>=parseInt(life_span_max))errors.life_span_min = 'min cannot be greater than or equal to max';
+        if(parseInt(life_span_max)<=parseInt(life_span_min))errors.life_span_max = 'max cannot be less than or equal to min';
+          
+        
+        return errors;
+    } */
     
     const handleChange = (e) =>{
         setInput({
             ...input,
             [e.target.name]:e.target.value
         })
+
+       //setErrors(validar({...input, [e.target.name] : e.target.value}))
     }
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        dispatch(postDogs(input))
+        if(name.trim()===''
+            ||weight_min.trim()===''
+            ||weight_max.trim()===''
+            ||height_min.trim()===''
+            ||height_max.trim()===''){
+                setErrors(true)
+                return alert('Faltan campos por completar')
+        }else{
+
+            dispatch(postDogs(input))
+            setInput({
+                name:"",
+                weight_min:"",
+                weight_max:"",
+                height_min:"",
+                height_max:"",
+                life_span_min: "",
+                life_span_max: "",
+                image:"",
+                temperaments:[],
+            })
+        }
+        
+    }
+    const handleSelectTemp = (e) =>{
+        
+        (temperaments.length < 6)&&setInput({
+            ...input,
+            temperaments:temperaments.includes(e.target.value)?[...temperaments]:[...temperaments, e.target.value]      
+        })
+        //temperaments.length === 6&&setBoton(false)
+        if(temperaments.length === 6){            
+            setBoton(false)
+        }
+    }
+    const handleDeleteTemp = (e) =>{
+        setInput({
+            ...input,
+            temperaments: temperaments.filter(t => t !== e)
+        })
+    }
+    const handleReset = (e) =>{
+        e.preventDefault();
         setInput({
             name:"",
             weight_min:"",
@@ -64,23 +258,9 @@ export default function Form(){
             image:"",
             temperaments:[],
         })
-        
-    }
-    const handleSelectTemp = (e) =>{
-        setInput({
-            ...input,
-            temperaments:[...input.temperaments, e.target.value]
-        })
-    }
-    const handleDeleteTemp = (e) =>{
-        setInput({
-            ...input,
-            temperaments: input.temperaments.filter(g => g !== e)
-        })
     }
 
-
-    console.log(temperaments);
+    console.log(errors);
 
     return(
         <>
@@ -91,6 +271,10 @@ export default function Form(){
                         
                         <div className={style.contentImg}>
                             
+                        <button>
+
+                        🢀<Link to= {'/home'}><span>back to home</span></Link>
+                        </button>
                             <div><img src={dog} alt="" /></div>
                         </div>
                         <div className={style.contentInput}>                            
@@ -101,26 +285,39 @@ export default function Form(){
                             <form action="" onSubmit={(e)=>handleSubmit(e)}>
                                 
                                 <div>
-                                    <p>Name<span> *</span></p>
+                                    <div className={style.flexErrors}>
+                                        <p>Name<span> *</span></p>
+                                        {input.name&&(<p className={style.pError}>{errorName}</p>)}
+                                    </div>
+                                    
                                     <input 
                                         type="text" 
                                         value={name}
                                         name="name"
-                                        onChange={handleChange}
+                                        onChange={e=>handleChange(e)}
                                         className={style.input}
                                         placeholder="Breed name..." 
+                                        required
                                         />
+                                        
                                 </div>
                                 {/* Contenedor del weight */}
                                 <div>
-                                    <p>Weight<span> *</span></p>
+                                    <div className={style.flexErrors}>
+                                        <p>{`Weight (kg)`}<span> *</span></p>
+                                        {input.weight_min && (<p className={style.pError}>{errorWeightMin}</p>)}
+                                        {input.weight_max && (<p className={style.pError}>{errorWeightMax}</p>)}
+                                    </div>
                                     <input 
                                         type="number" 
                                         value={weight_min}
                                         name="weight_min"
                                         onChange={handleChange}
                                         className={style.inputIni}
+                                        min="1"
+                                        max="98"
                                         placeholder="Min..." 
+                                        required
                                     />
                                     <input 
                                         type="number" 
@@ -128,12 +325,19 @@ export default function Form(){
                                         name="weight_max"
                                         onChange={handleChange}
                                         className={style.inputFin}
+                                        min="2"
+                                        max="99"
                                         placeholder="Max..." 
+                                        required
                                     />
                                 </div>
                                 {/* Contenedor del Height */}
                                 <div>
-                                    <p>Height<span> *</span></p>
+                                    <div className={style.flexErrors}>
+                                        <p>{`Height (cm)`}<span> *</span></p>
+                                        {input.height_min && (<p className={style.pError}>{errorHeightMin}</p>)}
+                                        {input.height_max && (<p className={style.pError}>{errorHeightMax}</p>)}
+                                    </div>
                                     <input 
                                         type="number" 
                                         value={height_min}
@@ -141,6 +345,7 @@ export default function Form(){
                                         onChange={handleChange}
                                         className={style.inputIni}
                                         placeholder="Min..." 
+                                        required
                                     />
                                     <input 
                                         type="number" 
@@ -149,11 +354,16 @@ export default function Form(){
                                         onChange={handleChange}
                                         className={style.inputFin}
                                         placeholder="Max..." 
+                                        required
                                     />
                                 </div>
                                 {/* Contenedor del Life_Span */}
                                 <div>
-                                    <p>life span</p>
+                                    <div className={style.flexErrors}>
+                                        <p>{`Life span (year)`}</p>
+                                        {input.life_span_min && (<p className={style.pError}>{errorLifeSpanMin}</p>)}
+                                        {input.life_span_max && (<p className={style.pError}>{errorLifeSpanMax}</p>)}
+                                    </div>
                                     <input 
                                         type="number" 
                                         value={life_span_min}
@@ -173,7 +383,12 @@ export default function Form(){
                                 </div>
                                 {/* Contenedor de Image */}
                                 <div className="">
+                                    
+                                    <div className={style.flexErrors}>
                                     <p>Image</p>
+                                    <div></div>
+                                    {input.image && (<p className={style.pError}>{errorImage}</p>)}
+                                </div>
                                     <input 
                                         type="text" 
                                         value={image}
@@ -183,11 +398,14 @@ export default function Form(){
                                         placeholder="http://myDog.jpg" 
                                     />
                                 </div>
+                                
                                 {/* Contenedor del Select */}
                                 <div className={style.contentSel}>
                                     
-                                    <select onChange={e => handleSelectTemp(e)} >
-                                        <option className={style.temp}>Temperaments</option>
+                                    <select onChange={e => handleSelectTemp(e)} disabled={!boton}>
+                                    {input.temperaments&&(<p className={style.pError}>{errorTemperament}123</p>)}
+                                        <option className={style.temp} disabled selected>Temperaments</option>
+                                        
                                         {temp.map((el, i) =>{
                                             return(
                                                 <option 
@@ -200,34 +418,12 @@ export default function Form(){
                                             )
                                         })}
                                     </select>
-                                    <ul>
-                                        <li>{temperaments.map(el => 
-                                                
-                                                <span className={style.span}>{el}
-                                                <button 
-                                                    className={style.button}
-                                                    onClick={()=>handleDeleteTemp(el)}>X
-                                                </button>
-                                            </span>
-                                                )}
-                                        </li>
-                                    </ul>
-                                
-                                    {/* {<ul>
-                                        <li>{temp.map(el => 
-                                            <span>{el}
-                                                <button 
-                                                    onClick={()=>handleDeleteTemp(el)}>X
-                                                </button>
-                                            </span>
-                                            )}
-                                        </li>
-                                    </ul>} */}
+                                    
                                 </div>
                                 <h3><span>* </span>these values are required</h3>
                              <div className={style.flexBoton}>
-                                <button type="submit" className={style.boton}>Accept</button>
-                                <button type="submit" className={style.boton}>Reset</button>
+                                <button type="submit" className={style.boton} /* disabled={!resValidar} */>Accept</button>
+                                <button type="submit" className={style.boton} onClick = {e => handleReset(e)}>Reset</button>
                             </div>
                             </form>
                             
@@ -235,7 +431,17 @@ export default function Form(){
                         </div>
                             
                     </div>
-                    <div className={style.res}><h2>Dog created</h2></div>
+                    <div className={style.res}>
+                        <h2>Dog created</h2>
+                        <div>
+                        {temperaments.map(el =>
+                                            <div className={style.flexSelect}>
+                                                <p>{el}</p>
+                                                <button onClick={()=>handleDeleteTemp(el)}>X</button>
+                                            </div>
+                                        )}
+                        </div>
+                    </div>
                 </div>
             </div>
             
