@@ -37,12 +37,12 @@ module.exports = (sequelize) => {
     life_span_min:{
       type: DataTypes.STRING,
       allowNull:true,
-      defaultValue: "5"
+      
     },
     life_span_max:{
       type: DataTypes.STRING,
       allowNull:true,
-      defaultValue: "15"
+      
     }, 
     image: {
       type: DataTypes.STRING,

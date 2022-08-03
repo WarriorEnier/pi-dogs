@@ -29,7 +29,8 @@ export default function Temperaments({setPag}){
         <>
             
             <select className={style.select}  onChange={e => handleFilterTemperaments(e)}>
-                <option value="todo">Todos</option>
+                <option value="" disabled selected>Temperaments</option>
+                <option value="todo" >All</option>
                 {allTemps.map((temp,i)=>{
                     return(
                         <option value={temp.name} key={i}>{temp.name}</option>

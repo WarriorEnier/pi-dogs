@@ -15,7 +15,7 @@ export default function Name({setPag}){
 
     return(
         <select className={style.select} onChange={e => handleFilterName(e)}>
-            <option>Alfabéticamente</option>
+            <option disabled selected>Alphabetically</option>
             <option value ='A-Z'> A - Z </option>
             <option value ='Z-A'> Z - A </option>
         </select>

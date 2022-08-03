@@ -27,7 +27,7 @@ export default function SearchBar(){
 
                         <input 
                             type="text"
-                            placeholder="Buscar" 
+                            placeholder="breed name..." 
                             className={style.input}
                             onChange={e => handleInputChange(e)}
                         />
@@ -37,7 +37,7 @@ export default function SearchBar(){
                                 className={style.boton}
                                 type="submit"
                                 
-                                > Buscar</button>
+                                > Search</button>
                         
             </form>
             

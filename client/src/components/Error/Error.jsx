@@ -13,6 +13,8 @@ export default function Error(){
     useEffect(()=>{
         reset()
     },[])
+
+   
     const handleReset = ()=>{
         dispatch(getDogs())
     }

@@ -3,17 +3,14 @@ import { getDogs } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import page from './Paginacion.module.css';
 
-export default function Paginacion({pag, setPag, maxPag, isTrue, setIsTrue}){
+export default function Paginacion({pag, setPag, maxPag}){
     const dispatch = useDispatch();
     const dogs = useSelector(state => state.allDogs);
     const [input, setInput] = useState(pag)
 
-    /* useEffect(()=>{
-      dispatch(getDogs())
-      
-        
-      
-    },[]) */
+    useEffect(()=>{
+      window.scrollTo({ behavior: 'smooth', top: '0px' }); 
+    },[input])
     
     const nextPage = () =>{
         setInput(parseInt(input)+1);
@@ -24,7 +21,11 @@ export default function Paginacion({pag, setPag, maxPag, isTrue, setIsTrue}){
         setInput(parseInt(input)-1);
         setPag(parseInt(pag)-1);
     }
-
+    /* const getPaginatedData = () => {
+      const startIndex = currentPage * dataLimit - dataLimit;
+      const endIndex = startIndex + dataLimit;
+      return data.slice(startIndex, endIndex);
+    }; */
     const onKeyDown = e => {
         if (e.keyCode == 13) {
           setPag (parseInt (e.target.value));

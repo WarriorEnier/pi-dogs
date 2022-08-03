@@ -12,6 +12,8 @@
 
 .select option{
     color:#0375b3;
+    background-color: whitesmoke;
+    
 }
 
 select:focus{

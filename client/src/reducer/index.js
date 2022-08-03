@@ -137,7 +137,7 @@ function rootReducer(state = initialState, action){
             const statusTemp = action.payload === 'todo'
                 ?allDogs3
                 :allDogs3.filter(el => !!el.createInDb
-                    ?el.temperaments?.some((tem) => tem.name.toLowerCase()===action.payload.toLowerCase())
+                    ?el.temperaments?.some((tem) => tem.toLowerCase()===action.payload.toLowerCase())
                     :el.temperaments?.some((tem) => tem.toLowerCase()===action.payload.toLowerCase()));
                 console.log(action.payload);
                 console.log(statusTemp)

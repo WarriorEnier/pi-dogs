@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {getTemperaments, postDogs} from '../../actions/index'
+import {getTemperaments, postDogs, getDogs} from '../../actions/index'
 import dog from "../../img/dogForm.jpg"
 import style from './Form.module.css';
+import DogCreate from "./DogCreate";
 
 export default function Form(){
     
@@ -21,6 +22,7 @@ export default function Form(){
         image:"",
         temperaments:[],
     })
+    const [copiaInput, setCopiaInput] = useState({})
     const {
         name,
         weight_min,
@@ -39,12 +41,14 @@ export default function Form(){
 
     useEffect(()=>{
         dispatch(getTemperaments())
+        dispatch(getDogs())
     },[]);
 
     function validarName(input){
         if(!input.match(/^\S/)){return 'only text'}      
         if(!input.match((/^[a-zA-Z ]+$/))) {return 'only text '}  
         if(input.length < 4){return 'very short name';}
+        if(input.length > 50){return 'very long name';}
     }
 
     function validarWeightMin(input,max){
@@ -64,29 +68,29 @@ export default function Form(){
     }
 
     function validarHeightMin(input, max){
-        if(input<0)return 'only number of positives';
+        //if(input<0)return 'only number of positives';
         if(!input.match((/^\d+$/)))return 'only number';
         if(input > 99)return 'min out of range';
-        if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
+        //if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
     }
     function validarHeightMax(input, min){
-        if(input<0)return 'only number of positives';
+        //if(input<0)return 'only number of positives';
         if(!input.match((/^\d+$/)))return 'only number';
         if(input > 120)return 'max out of range';
         if(parseInt(input)<=parseInt(min))return 'max cannot be less than or equal to min';
     }
 
     function validarLifeSpanMin(input, max){
-        if(input<0)return 'only number of positives';
+        //if(input<0)return 'only number of positives';
         if(!input.match((/^\d+$/)))return 'only number';
-        if(input > 99)return 'min out of range';
-        if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
+        if(input > 10)return 'min out of range';
+        //if(parseInt(input)>=parseInt(max))return 'min cannot be greater than or equal to max';
     }
 
     function validarLifeSpanMax(input, min){
-        if(input<0)return 'only number of positives';
+        //if(input<0)return 'only number of positives';
         if(!input.match((/^\d+$/)))return  'only number';
-        if(input > 120)return 'max out of range';
+        if(input > 20)return 'max out of range';
         if(parseInt(input)<=parseInt(min))return 'max cannot be less than or equal to min';
     }
 
@@ -206,20 +210,24 @@ export default function Form(){
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        //console.log(input.name)
         const nameRep = allDogs.filter(dog => dog.name.toLowerCase()===input.name.toLowerCase())
-        
-        if(name.trim()===''
-            ||weight_min.trim()===''
-            ||weight_max.trim()===''
-            ||height_min.trim()===''
-            ||height_max.trim()===''
-            ||temperaments.length===0){
-                setErrors(true)
-                //return alert('Faltan campos por completar')
-        }else if(nameRep.length!==0){
-                setErrors(true)
-                return alert('Ya esta el perro')
-        }else{           
+        console.log(allDogs)
+        if(nameRep.length>0){
+            //setErrors(true)
+            return alert('already this breed!!!')
+        }else if(name.trim()===''
+        ||weight_min.trim()===''
+        ||weight_max.trim()===''
+        ||height_min.trim()===''
+        ||height_max.trim()===''
+        ||temperaments.length===0){
+            //setErrors(true)
+            return alert('Missing fields to complete!!!')
+                
+        }else{     
+            setCopiaInput(input)
+            setErrors(true)      
             dispatch(postDogs(input))
             setInput({
                 name:"",
@@ -309,7 +317,7 @@ export default function Form(){
                                         onChange={e=>handleChange(e)}
                                         className={style.input}
                                         placeholder="Breed name..." 
-                                        required
+                                        
                                         />
                                         
                                 </div>
@@ -329,10 +337,10 @@ export default function Form(){
                                         min="1"
                                         max="98"
                                         placeholder="Min..." 
-                                        required
+                                        
                                     />
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         value={weight_max}
                                         name="weight_max"
                                         onChange={handleChange}
@@ -340,7 +348,7 @@ export default function Form(){
                                         min="2"
                                         max="99"
                                         placeholder="Max..." 
-                                        required
+                                        
                                     />
                                 </div>
                                 {/* Contenedor del Height */}
@@ -351,22 +359,22 @@ export default function Form(){
                                         {input.height_max && (<p className={style.pError}>{errorHeightMax}</p>)}
                                     </div>
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         value={height_min}
                                         name="height_min"
                                         onChange={handleChange}
                                         className={style.inputIni}
                                         placeholder="Min..." 
-                                        required
+                                        
                                     />
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         value={height_max}
                                         name="height_max"
                                         onChange={handleChange}
                                         className={style.inputFin}
                                         placeholder="Max..." 
-                                        required
+                                        
                                     />
                                 </div>
                                 {/* Contenedor del Life_Span */}
@@ -377,7 +385,7 @@ export default function Form(){
                                         {input.life_span_max && (<p className={style.pError}>{errorLifeSpanMax}</p>)}
                                     </div>
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         value={life_span_min}
                                         name="life_span_min"
                                         onChange={handleChange}
@@ -385,7 +393,7 @@ export default function Form(){
                                         placeholder="Min..." 
                                     />
                                     <input 
-                                        type="number" 
+                                        type="text" 
                                         value={life_span_max}
                                         name="life_span_max"
                                         onChange={handleChange}
@@ -447,7 +455,13 @@ export default function Form(){
                             
                     </div>
                     <div className={style.res}>
-                        <h2>Dog created</h2>
+                        <div>
+                            {/* <h2>Dog created</h2> */}
+                            <div>
+                                {errors&&<DogCreate copiaInput={copiaInput}/>}
+                                
+                            </div>
+                        </div>
                         <div>
                         {temperaments.map(el =>
                                             <div className={style.flexSelect}>
@@ -459,6 +473,7 @@ export default function Form(){
                     </div>
                 </div>
             </div>
+                
             
         
             {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#eaaf0b" fill-opacity="1" d="M0,256L40,240C80,224,160,192,240,186.7C320,181,400,203,480,218.7C560,235,640,245,720,234.7C800,224,880,192,960,197.3C1040,203,1120,245,1200,245.3C1280,245,1360,203,1400,181.3L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg> */}

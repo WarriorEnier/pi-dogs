@@ -105,8 +105,8 @@ const getMyDb = async() =>{
                 height_max: e.height_max,
                 weight_min: e.weight_min,
                 weight_max: e.weight_max,
-                life_span_min: e.life_span_min,
-                life_span_max:e.life_span_max,
+                life_span_min: e.life_span_min || '5',
+                life_span_max:e.life_span_max || '15',
                 createInDb: e.createInDb,
                 temperaments: e.temperaments.map(e => e.name)
             }

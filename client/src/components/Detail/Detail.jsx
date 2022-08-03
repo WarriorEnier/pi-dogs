@@ -31,14 +31,14 @@ export default function Detail(props){
                             <img src={myDog[0].image}/>
                         </div>
                         <div className={style.body}>
-                            <h2>Nombre : {myDog[0].name}</h2>
-                            <h3>Peso   : {myDog[0].weight_min} a {myDog[0].weight_max} kilos</h3>
-                            <h3>Tamaño : {myDog[0].height_min} a {myDog[0].height_max} cm</h3>
-                            <h3>Esperanza de vida : {myDog[0].life_span_min} a {myDog[0].life_span_max} años</h3>
-                            <h3>Temperamento : {!!myDog[0].createInDb
+                            <h2>Name : {myDog[0].name}</h2>
+                            <h3>Weight   : {myDog[0].weight_min} to {myDog[0].weight_max} kilograms</h3>
+                            <h3>Height : {myDog[0].height_min} to {myDog[0].height_max} Centimeters</h3>
+                            <h3>Life Span : {myDog[0].life_span_min} to {myDog[0].life_span_max} Years</h3>
+                            <h3>Temperament(s) : {!!myDog[0].createInDb
                                 ?myDog[0].temperaments.map((tem, i) =>{ 
                                     return i === tem.length-1
-                                    ?tem.name:tem.name+' | '
+                                    ?tem:tem+' | '
                                 })
                                 :myDog[0].temperaments.map((tem, i) =>{ 
                                     return i === tem.length-1
@@ -52,7 +52,7 @@ export default function Detail(props){
                 }
                 <button>
 
-                🢀<Link to= {'/home'}><span>Volver al home</span></Link>
+                🢀<Link to= {'/home'}><span>Back to Home</span></Link>
                 </button>
                 
             </div>

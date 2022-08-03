@@ -68,6 +68,26 @@
     color: #0375b3;
 }
 
+.svgSup button{
+    position: relative;
+    top: -300px;
+    background-color: #0375b3;
+    border:1px solid white;
+    color: white;
+    padding: 8px 20px;
+    font-size: 18px;
+    border-radius: 7px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: all 500ms ease-in-out;
+}
+
+/* .svgSup button:hover{
+    background-color: white;
+    color: #0375b3;
+    border: #0375b3;
+}
+ */
 
 /* .container{
    width: 100%;
