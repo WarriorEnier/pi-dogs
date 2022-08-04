@@ -1,20 +1,26 @@
 import React, { useEffect } from "react";
-import { getDogById, reset } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom';
-import Loading from "../Loading/Loading";
-import style from './Detail.module.css';
+
+import { getDogById,getDogs, reset } from "../../actions";
 
 import ErrorId from "../Error/ErrorId";
+import Loading from "../Loading/Loading";
+
+import style from './Detail.module.css';
+
 
 
 
 export default function Detail(props){
     const dispatch = useDispatch();
-
+    const dogs = useSelector(state => state.allDogs);
     useEffect(()=>{
         dispatch(getDogById(props.match.params.id));
         dispatch(reset());
+        if(dogs.length === 0){
+            dispatch(getDogs())
+        }
     },[dispatch])
 
     const myDog = useSelector(state => state.detail);

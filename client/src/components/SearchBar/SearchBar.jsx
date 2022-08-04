@@ -2,9 +2,9 @@ import React,{useState} from "react";
 import {getNameDogs} from "../../actions"
 import { useDispatch } from "react-redux";
 import style from './SearchBar.module.css'
-import { Link } from "react-router-dom";
 
-export default function SearchBar(){
+
+export default function SearchBar({setPag}){
     const dispatch = useDispatch();
     const [name, setName] = useState('');
 
@@ -17,7 +17,10 @@ export default function SearchBar(){
     const handleSubmit = (e) =>{
         e.preventDefault();
         dispatch(getNameDogs(name));
+        
         setName(e.target.reset());
+        setPag(1)
+        
         
     }
     return(

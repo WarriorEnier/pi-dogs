@@ -4,6 +4,19 @@
     justify-content: center;
     align-items: center;
 }
+
+
+.flex ul{
+    color: #0375b3;
+    font-weight: bold;
+}
+.flex li{
+    display: flex;
+    cursor: pointer;
+    margin: 0 8px;
+    font-size: 30px;
+
+}
 .input{
     margin: 10px;
     padding: 5px;
@@ -23,7 +36,7 @@
     margin: 10px;
 
 }
-.boton{
+button{
     font-size: 26px;
     padding: 7px;
     background-color: #0375b3;
@@ -34,7 +47,12 @@
     transition: all 500ms ease-out;
 }
 
-.boton:hover{
+.boton{
+    padding: 7px 12px;
+    margin: 0 10px
+}
+
+button:hover{
     background-color: #eaaf0b;
     border: 2px solid #0375b3;
     color: white;

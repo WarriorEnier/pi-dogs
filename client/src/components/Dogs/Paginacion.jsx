@@ -1,16 +1,15 @@
 import React,{useState, useEffect} from "react";
-import { getDogs } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
+
 import page from './Paginacion.module.css';
 
 export default function Paginacion({pag, setPag, maxPag}){
-    const dispatch = useDispatch();
-    const dogs = useSelector(state => state.allDogs);
-    const [input, setInput] = useState(pag)
+    
+    const [input, setInput] = useState(1)
+    
 
     useEffect(()=>{
-      window.scrollTo({ behavior: 'smooth', top: '0px' }); 
-    },[input])
+      setInput(pag)
+    },[pag])
     
     const nextPage = () =>{
         setInput(parseInt(input)+1);
@@ -21,11 +20,7 @@ export default function Paginacion({pag, setPag, maxPag}){
         setInput(parseInt(input)-1);
         setPag(parseInt(pag)-1);
     }
-    /* const getPaginatedData = () => {
-      const startIndex = currentPage * dataLimit - dataLimit;
-      const endIndex = startIndex + dataLimit;
-      return data.slice(startIndex, endIndex);
-    }; */
+    
     const onKeyDown = e => {
         if (e.keyCode == 13) {
           setPag (parseInt (e.target.value));
@@ -45,9 +40,6 @@ export default function Paginacion({pag, setPag, maxPag}){
       };
     const onChange = (e) =>{
         setInput(e.target.value);
-        setInput(pag)    
-    
-
     };
     return (
             <div className={page.flex}>
@@ -63,7 +55,7 @@ export default function Paginacion({pag, setPag, maxPag}){
                     name='page'
                     autoComplete="off"  
                     /* disabled  */                 
-                    value={pag}
+                    value={input}
                     className={page.input}
                 />
                 <p className={page.p}>de {Math.ceil(maxPag)}</p>

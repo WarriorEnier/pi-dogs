@@ -10,7 +10,7 @@ export default function Form(){
     
     const [boton, setBoton] = useState(true)
     const [errors, setErrors] = useState(false);
-    const [tempSel, setTemp] = useState([])
+    
     const [input, setInput] = useState({
         name:"",
         weight_min:"",
@@ -133,88 +133,20 @@ export default function Form(){
         errorTemperament,
         );
     
-    /* function validar(input){
-        let errors={};
-        const nameRep = allDogs.filter(dog => dog.name.toLowerCase()===input.name.toLowerCase())
-        console.log(nameRep)
-        
-        if(!input.name){errors.name = 'name field is required';}
-        else if(!input.name.match((/^[a-zA-Z ]+$/))) {errors.name ='only text '}
 
-        
-        if(!input.weight_min){errors.weight_min = 'min field is required';}
-        else if(!input.weight_min.match((/^\d+$/))){errors.weight_min = 'only number';}
-        else if(input.weight_min > 100){errors.weight_min = 'min out of range';}
-        else if(parseInt(input.weight_min)>=parseInt(input.weight_max))errors.weight_min = 'min cannot be greater than or equal to max';
-        
-        if(!input.weight_max){errors.weight_max = 'max field is required';}
-        else if(!input.weight_max.match((/^\d+$/))){errors.weight_max = 'only number';}
-        else if(input.weight_max > 150){errors.weight_max = 'max out of range';}
-        else if(parseInt(input.weight_max)<=parseInt(input.weight_min))errors.weight_min = 'max cannot be less than or equal to min';
-
-
-        if(!input.height_min){errors.height_min = 'min field is required';}
-        else if(!input.height_min.match((/^\d+$/))){errors.height_min = 'only number';}
-        else if(input.height_min > 100){errors.height_min = 'min out of range';}
-        else if(parseInt(input.height_min)>=parseInt(input.height_max))errors.height_min = 'min cannot be greater than or equal to max';
-        
-        if(!input.height_max){errors.height_max = 'max field is required';}
-        else if(!input.height_max.match((/^\d+$/))){errors.height_max = 'only number';}
-        else if(input.height_max > 150){errors.height_max = 'max out of range';}
-        else if(parseInt(input.height_max)<=parseInt(input.height_min))errors.height_min = 'max cannot be less than or equal to min';
-
-        
-        if(!input.life_span_min.match((/^\d+$/))){errors.life_span_min = 'only number';}
-        else if(input.life_span_min > 100){errors.life_span_min = 'min out of range';}
-        else if(parseInt(input.life_span_min)>=parseInt(input.life_span_max))errors.height_min = 'min cannot be greater than or equal to max';
-        
-        
-        if(!input.life_span_max.match((/^\d+$/))){errors.life_span_max = 'only number';}
-        else if(input.life_span_max > 150){errors.life_span_max = 'max out of range';}
-        else if(parseInt(input.life_span_max)<=parseInt(input.life_span_min))errors.height_min = 'max cannot be less than or equal to min';
-
-        if(temperaments.length > 6)errors.temperaments = 'maximum 6 temperaments per breed';
-
-        if(!input.image.match(/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/))errors.image = 'URL invalida'
-        //else if(nameRep.length>0){errors.name = 'this name is already in the DB'}
-        /* 
-        
-        if(height_min.trim()==='')errors.height_min = 'height min field is required';
-        if(life_span_max.trim()==='')errors.height_max = 'height min field is required';
-        
-        
-        
-        if(!height_min.match(/^\d+$/))errors.height_min = 'only number';
-        if(!height_max.match(/^\d+$/))errors.height_max = 'only number';
-        if(!life_span_min.match(/^\d+$/))errors.life_span_min = 'only number';
-        if(!life_span_max.match(/^\d+$/))errors.life_span_max = 'only number';
-        
-        
-        if(parseInt(height_min)>=parseInt(height_max))errors.height_min = 'min cannot be greater than or equal to max';
-        if(parseInt(height_max)<=parseInt(height_min))errors.height_min = 'max cannot be less than or equal to min';
-        if(parseInt(life_span_min)>=parseInt(life_span_max))errors.life_span_min = 'min cannot be greater than or equal to max';
-        if(parseInt(life_span_max)<=parseInt(life_span_min))errors.life_span_max = 'max cannot be less than or equal to min';
-          
-        
-        return errors;
-    } */
     
     const handleChange = (e) =>{
         setInput({
             ...input,
             [e.target.name]:e.target.value
-        })
-
-       //setErrors(validar({...input, [e.target.name] : e.target.value}))
+        })   
     }
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        //console.log(input.name)
+        
         const nameRep = allDogs.filter(dog => dog.name.toLowerCase()===input.name.toLowerCase())
-        console.log(allDogs)
-        if(nameRep.length>0){
-            //setErrors(true)
+        if(nameRep.length>0){            
             return alert('already this breed!!!')
         }else if(name.trim()===''
         ||weight_min.trim()===''
@@ -222,7 +154,7 @@ export default function Form(){
         ||height_min.trim()===''
         ||height_max.trim()===''
         ||temperaments.length===0){
-            //setErrors(true)
+            
             return alert('Missing fields to complete!!!')
                 
         }else{     
@@ -249,9 +181,13 @@ export default function Form(){
             ...input,
             temperaments:temperaments.includes(e.target.value)?[...temperaments]:[...temperaments, e.target.value]      
         })
-        //temperaments.length === 6&&setBoton(false)
+       
         if(temperaments.length === 6){            
             setBoton(false)
+        }
+
+        if(errors){            
+            setErrors(false)
         }
     }
     const handleDeleteTemp = (e) =>{
@@ -278,11 +214,10 @@ export default function Form(){
         })
     }
 
-    console.log(errors);
+    
 
     return(
         <>
-        {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#eaaf0b" fill-opacity="1" d="M0,320L34.3,282.7C68.6,245,137,171,206,122.7C274.3,75,343,53,411,74.7C480,96,549,160,617,160C685.7,160,754,96,823,80C891.4,64,960,96,1029,90.7C1097.1,85,1166,43,1234,37.3C1302.9,32,1371,64,1406,80L1440,96L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z"></path></svg> */}
             <div className={style.contenedor}>
                 <div className={style.content}>
                     <div className={style.contentForm}>
@@ -298,7 +233,7 @@ export default function Form(){
                         <div className={style.contentInput}>                            
                             <div>                        
                                 <h2>Create DOG</h2>
-                                {/* {errors?(<p className={style.pError}>Este perro ya se encuentra</p>):null} */}
+                                
                             </div>
                             {/* Contenedor del name */}
                             <form action="" onSubmit={(e)=>handleSubmit(e)}>
@@ -476,7 +411,7 @@ export default function Form(){
                 
             
         
-            {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#eaaf0b" fill-opacity="1" d="M0,256L40,240C80,224,160,192,240,186.7C320,181,400,203,480,218.7C560,235,640,245,720,234.7C800,224,880,192,960,197.3C1040,203,1120,245,1200,245.3C1280,245,1360,203,1400,181.3L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg> */}
+            
         </>
     )
 }

@@ -25,7 +25,7 @@ export default function DogCreate({copiaInput}){
                    Height: <span>{height_min} to {height_max} Centimeters</span>
                 </p>
                 <p>
-                   Life Span: <span>{life_span_min} to {life_span_max} Years</span>
+                   Life Span: <span>{!!life_span_min?life_span_min:'5'} to {!!life_span_max?life_span_max:'15'} Years</span>
                 </p>
                 <p>Temperaments: <span>{temperaments.map(el => el + ' | ')}</span></p>
 

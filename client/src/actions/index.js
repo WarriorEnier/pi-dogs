@@ -58,8 +58,7 @@ export const getNameDogs = (name)=>{
                 type: GET_NAME_DOGS,
                 payload: nameJson.data
             });
-        } catch (error) {
-            console.log(error);
+        } catch (error) {            
 			return dispatch({ type: GET_NAME_DOGS, payload:'Error'});
         }
     }

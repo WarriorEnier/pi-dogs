@@ -1,33 +1,32 @@
 import React, {useEffect, useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import { Link} from "react-router-dom";
-import { getDogs,reset} from "../../actions/index"
-import AllDogs from "../Dogs/AllDogs";
-import Paginacion from "../Dogs/Paginacion";
 
+import { getDogs,reset} from "../../actions/index"
 import { filterByOrdenamiento, filterByWeight } from "../../actions/index";
+
 import Creado from "../Filtros/Creado";
 import Temperaments from "../Filtros/Temperaments";
-
-
-import style from './Home.module.css';
-import s from '../Filtros/Filtros.module.css';
-import MaxMin from "../Filtros/MaxMin";
+import AllDogs from "../Dogs/AllDogs";
+import Paginacion from "../Dogs/Paginacion";
 import Name from "../Filtros/Name";
 import SearchBar from "../SearchBar/SearchBar";
+
+
 import logo from "../../img/dog2.png"
 import Error from "../Error/Error";
 
+import style from './Home.module.css';
+import s from '../Filtros/Filtros.module.css';
 
 
 export default function Home(){
     const dispatch = useDispatch();
-    const [isTrue, setIsTrue] = useState(false)
     const allDogs = useSelector((state) =>state.dogs);
 
     const [pag, setPag] = useState(1);
-    const [porPag, setPorPag] = useState(8);
-    const [orden, setOrden] = useState('')
+    const [porPag, /* setPorPag */] = useState(8);
+    const [/* orden */, setOrden] = useState('')
     
 
     const paginado = (pagNum)=>{
@@ -61,12 +60,15 @@ export default function Home(){
         dispatch(filterByWeight(e.target.value));
         setPag(1)
     }
-  
+
+    
     const maxPag = allDogs.length/porPag;
     const first = (pag-1)*porPag;
     const end = (pag-1)*porPag+porPag;
     const currentDogs = allDogs.slice(first, end)
     
+  
+
     return(
         <>  
         <div className={style.container}>
@@ -74,10 +76,8 @@ export default function Home(){
         <div className={style.nav}>
                 <div className={style.flex}>
 
-                    <div className={style.titleFlex}>
-                        {/* <i class="fa-solid fa-dog"></i> */}
-                        <img className={style.img}  src={logo} alt="" />
-                        {/* <span className={style.img}>🐩</span> */}
+                    <div className={style.titleFlex}>                        
+                        <img className={style.img}  src={logo} alt="" />                        
                         <h1 className={style.titulo}>DOGS</h1>
                     </div>
 
@@ -88,8 +88,7 @@ export default function Home(){
                                 <option value="desc">DESC</option>
                         </select>
                         <Creado/>
-                        <Temperaments setPag={setPag}/>
-                        {/* <MaxMin  setPag={setPag}/> */}
+                        <Temperaments setPag={setPag}/>                        
                         <select  className={s.select} onChange={e=>handleFilterWeight(e)}>
                             <option disabled selected>Weight</option>
                             <option value="max">Max</option>
@@ -101,7 +100,7 @@ export default function Home(){
                         <Link to ='/home/dog/form'><span className={style.form}>Create🐶</span></Link>
                     </div>
                     <div>
-                        <SearchBar/>
+                        <SearchBar setPag={setPag}/>
                     </div>
                 </div>
             </div>
@@ -113,8 +112,8 @@ export default function Home(){
             </div>
             
 
-            {/* <Order setPag={setPag}/> */}
-            <div /* className={style.container} */>
+            
+            <div>
                 {allDogs === 'Error'
                 ?<Error/>         
                 :<AllDogs currentDogs={currentDogs} />
@@ -122,8 +121,7 @@ export default function Home(){
                 
                 
             </div>
-        </div>
-
+        </div>                
                 <Paginacion pag={pag} setPag={paginado} maxPag={maxPag} />
                 <div className={style.svg}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#eaaf0b" fill-opacity="1" d="M0,256L40,240C80,224,160,192,240,186.7C320,181,400,203,480,218.7C560,235,640,245,720,234.7C800,224,880,192,960,197.3C1040,203,1120,245,1200,245.3C1280,245,1360,203,1400,181.3L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
@@ -132,17 +130,4 @@ export default function Home(){
         </>
 
     )
-    /*  */
-    /* allDogs?.map(el =>{
-        return(
-            <>
-            <Link to={'/home/dog/'+el.id}>
-                {el.name},
-                {el.image}
-            </Link>
-            <h1>Estamos en el HOME</h1>
-            </>
-        )
-
-    }) */
 }
