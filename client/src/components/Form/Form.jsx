@@ -10,7 +10,6 @@ export default function Form(){
     
     const [boton, setBoton] = useState(true)
     const [errors, setErrors] = useState(false);
-    
     const [input, setInput] = useState({
         name:"",
         weight_min:"",
@@ -22,6 +21,7 @@ export default function Form(){
         image:"",
         temperaments:[],
     })
+    
     const [copiaInput, setCopiaInput] = useState({})
     const {
         name,
@@ -398,8 +398,8 @@ export default function Form(){
                             </div>
                         </div>
                         <div>
-                        {temperaments.map(el =>
-                                            <div className={style.flexSelect}>
+                        {temperaments.map((el,i) =>
+                                            <div className={style.flexSelect} key={i}>
                                                 <p>{el}</p>
                                                 <button onClick={()=>handleDeleteTemp(el)}>X</button>
                                             </div>

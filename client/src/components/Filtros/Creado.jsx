@@ -5,18 +5,21 @@ import style from './Filtros.module.css';
 
 
 
-export default function Creado(){
+export default function Creado({setPag}){
     const dispatch = useDispatch();
     const dog = useSelector(state => state.dogs)
     useEffect(()=>{
         if(dog.length ===0){
             dispatch(getDogs())
+            
         }
     },[dispatch])
     function handleFilterCreated(e){
         e.preventDefault();
+        
         dispatch(filterCreated(e.target.value));
         dispatch(reset())
+        setPag(1)
     }
 
     return(

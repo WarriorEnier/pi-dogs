@@ -27,7 +27,8 @@ export default function Paginacion({pag, setPag, maxPag}){
           if (
             isNaN ((e.target.value)) ||
             parseInt (e.target.value < 1) ||
-            parseInt (e.target.value) > Math.ceil (maxPag)
+            parseInt (e.target.value) > Math.ceil (maxPag) ||
+            parseInt(e.target.value) < 1
             
           ) {
             setPag (1);

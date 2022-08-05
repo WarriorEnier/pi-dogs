@@ -87,7 +87,7 @@ export default function Home(){
                                 <option value="asc">ASC</option>
                                 <option value="desc">DESC</option>
                         </select>
-                        <Creado/>
+                        <Creado setPag={setPag}/>
                         <Temperaments setPag={setPag}/>                        
                         <select  className={s.select} onChange={e=>handleFilterWeight(e)}>
                             <option disabled selected>Weight</option>
